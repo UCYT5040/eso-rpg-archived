@@ -90,7 +90,7 @@ def main():
                 elif char == '(':
                     skip_stack += 1
                     try:
-                        if vars_vals[line[iteration + 1]][0] == 1:
+                        if vars_vals[line[iteration + 1]].sum() == 1:
                             if_stack += 1
                     except KeyError:
                         return print(
@@ -98,15 +98,15 @@ def main():
                 elif char == '[':
                     skip_stack += 1
                     try:
-                        if vars_vals[line[iteration + 1]][0] != 1:
+                        if vars_vals[line[iteration + 1]].sum() != 1:
                             if_not_stack += 1
                     except KeyError:
                         return print(
                             "!!! eso rpg error !!!\nif not statement requesting a variable or value that doesn't exist yet")
-                elif char == '[':
+                elif char == '{':
                     skip_stack += 1
                     try:
-                        if vars_vals[line[iteration + 1]][0] != 1:
+                        if vars_vals[line[iteration + 1]].sum() == 1:
                             while_stack += 1
                     except KeyError:
                         return print(
