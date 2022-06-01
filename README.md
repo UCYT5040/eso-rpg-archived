@@ -10,7 +10,7 @@ There are levels built into the language, with characters and buildings. It is u
 
 ### Notes
 
-- It is up to you to decide the dialouge. Each NPC has a dialouge ID.
+- It is up to you to decide the dialogue. Each NPC has a dialogue ID.
 - Blocks have IDs that correspond to the blocks type. You can decide what each type is.
 
 ## Language Basics
@@ -49,19 +49,20 @@ There are levels built into the language, with characters and buildings. It is u
 - If/If not
   - If uses parentheses (`()`) and if not uses brackets (`[]`).
   - Provide a variable to check. Must be 0 or 1, otherwise error.
-  - Example: `(d(q>'This dialouge has two buttons')[q>'This dialouge has one button.'])` This checks if the user is in a dialouge. If there is a secondary interaction available, it outputs that there are two buttons. If the secondary interations is not available, it outputs false. Note that `d` returns boolean of if user is in a dialouge, and `q` returns is a secondary interaction is available.
+  - Example: `(d(q>'This dialogue has two buttons')[q>'This dialogue has one button.'])` This checks if the user is in a dialogue. If there is a secondary interaction available, it outputs that there are two buttons. If the secondary interations is not available, it outputs false. Note that `d` returns boolean of if user is in a dialogue, and `q` returns is a secondary interaction is available.
 - Values
   - Values are just like variables, but they can't be set.
   - `e`
     - Boolean for if the facing block is primary interactable.
-    - If in dialouge, this is always true because there is no dialouge that doesn't have a single button.
+    - If in dialogue, this is always true because there is no dialogue that doesn't have a single button.
   - `q`
     - Boolean for is the facing block is secondary interactable.
-    - If in dialouge, boolean for if there is a second button.
+    - If in dialogue, boolean for if there is a second button.
   - `d`
-    - Boolean for if in dialouge.
+    - Boolean for if in dialogue.
   - `i`
     - Returns ID of the facing block.
   - `o`
-    - Returns ID of the open dialouge.
-    - Error if dialouge is not open.
+    - Returns ID of the open dialogue.
+      - ID is used to identify who is saying something, not what is being said.
+    - Error if dialogue is not open.
