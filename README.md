@@ -64,5 +64,5 @@ There are levels built into the language, with characters and buildings. It is u
     - Returns ID of the facing block.
   - `o`
     - Returns ID of the open dialogue.
-      - ID is used to identify who is saying something, not what is being said.
+      - ID is used to identify what someone is saying, not who is saying something.
     - Error if dialogue is not open.
