@@ -44,7 +44,7 @@ def main():
     vars_vals = {
         "e": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
         "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 2 else [0],
-        "d": [1] if dialouge else [0], "i": [get_facing(level, player_coordinates, player_facing)]}
+        "d": [1], "i": [get_facing(level, player_coordinates, player_facing)]}
     for line in lines:
         if_stack = 0  # +1 for every (, -1 for every ). Should be 0 by the end of the line.
         if_not_stack = 0
@@ -148,6 +148,14 @@ def main():
                              "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
                                                  'actions']) >= 2 else [0],
                              "i": [get_facing(level, player_coordinates, player_facing)]}
+            elif char == 'W':
+                player_facing = 0
+            elif char == 'D':
+                player_facing = 1
+            elif char == 'S':
+                player_facing = 2
+            elif char == 'A':
+                player_facing = 3
             else:
                 if not re.search("(\\(.|\\[.)*.\\?'.*'(\\)|\\])*", line) is None:
                     statement = re.sub('(\\(.)|(\\[.)|(\\])|(\\))', '', line).split('?')
