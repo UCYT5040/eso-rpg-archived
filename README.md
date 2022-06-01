@@ -50,6 +50,9 @@ There are levels built into the language, with characters and buildings. It is u
   - If uses parentheses (`()`) and if not uses brackets (`[]`).
   - Provide a variable to check. Must be 0 or 1, otherwise error.
   - Example: `(d(q>'This dialogue has two buttons')[q>'This dialogue has one button.'])` This checks if the user is in a dialogue. If there is a secondary interaction available, it outputs that there are two buttons. If the secondary interations is not available, it outputs false. Note that `d` returns boolean of if user is in a dialogue, and `q` returns is a secondary interaction is available.
+- While
+  - Uses curly brackets `{}`.
+  - Provide a variable to check. Must be 0 or 1, otherwise error.
 - Values
   - Values are just like variables, but they can't be set.
   - `e`
