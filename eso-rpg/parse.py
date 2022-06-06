@@ -34,8 +34,7 @@ def parse_code(code, vars_vals, dialouge, player_facing, level):
                 string_builder.append(ord(line[iteration + 1]))
             elif char == '/':
                 skip_stack += 1
-                for x in vars_vals[line[iteration + 1]]:
-                    string_builder.append(x)
+                string_builder.extend(iter(vars_vals[line[iteration + 1]]))
             else:
                 string_builder.append(ord(char))
         elif char == '(':
@@ -133,8 +132,7 @@ def parse_code(code, vars_vals, dialouge, player_facing, level):
             player_facing = 2
         elif char == 'A':
             player_facing = 3
-        else:
-            if not re.search("(\\(.|\\[.)*.\\?'.*'(\\)|\\])*", line) is None:
-                statement = re.sub('(\\(.)|(\\[.)|(\\])|(\\))', '', line).split('?')
-                vars_vals[statement[0]] = statement[1]
+        elif re.search("(\\(.|\\[.)*.\\?'.*'(\\)|\\])*", line) is not None:
+            statement = re.sub('(\\(.)|(\\[.)|(\\])|(\\))', '', line).split('?')
+            vars_vals[statement[0]] = statement[1]
     return (vars_vals, dialouge, player_facing, level)
