@@ -123,20 +123,20 @@
 # WARNING: This file contains data that may ruin the experience. Only continue if you have finished all the levels or if you want to cheat. This file also contains block types and what they do. Feel free to open an issue for help with creating your RPG if you don’t want to cheat. The README file also has some information that could help you, try re-reading it.
 
 # Block types
-blocks = {
-    0: { # air
+blocks = [
+    { # air
         'move_through': True, # You can walk through air
         'actions': [] # No actions on air
     },
-    1: { # outdoor wall
+    { # outdoor wall
         'move_through': False,
         'actions': []
     },
-    2: { # indoor wall
+    { # indoor wall
         'move_through': False,
         'actions': []
     },
-    3: {
+    {
         'move_through': True,
         'actions': [{
             'type': 'dialouge',
@@ -144,29 +144,29 @@ blocks = {
             'desc': 'Good luck outside!'
         }]
     },
-    4: {
+    {
         'move_through': False,
         'actions': [{
             'type': 'win'
         }]
     }
-}
+]
 
 levels = {
     "none": [
-        "111",
-        "1@1",
-        "111"
+        ['1', '1', '1'],
+        ['1', '@', '1'],
+        ['1', '1', '1']
     ],
     "outside": [
-        "1111111111",
-        "1000000001",
-        "1002222001",
-        "1002@32001",
-        "1002002001",
-        "1002202001",
-        "1000000001",
-        "1000400001",
-        "1111111111"
+        ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
+        ['1', '0', '0', '0', '0', '0', '0', '0', '0', '1'],
+        ['1', '0', '0', '2', '2', '2', '2', '0', '0', '1'],
+        ['1', '0', '0', '2', '@', '3', '2', '0', '0', '1'],
+        ['1', '0', '0', '2', '0', '0', '2', '0', '0', '1'],
+        ['1', '0', '0', '2', '2', '0', '2', '0', '0', '1'],
+        ['1', '0', '0', '0', '0', '0', '0', '0', '0', '1'],
+        ['1', '0', '0', '0', '4', '0', '0', '0', '0', '1'],
+        ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
     ]
 }

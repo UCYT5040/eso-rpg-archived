@@ -1,4 +1,6 @@
-def parse_code(code, vars_vals, dialouge, player_facing, level):
+import re
+
+def parse(line, vars_vals, dialogue, player_facing, level):
     if_stack = 0  # +1 for every (, -1 for every ). Should be 0 by the end of the line.
     if_not_stack = 0
     while_stack = 0
@@ -81,7 +83,7 @@ def parse_code(code, vars_vals, dialouge, player_facing, level):
             for while_loop in while_stack:
                 # try: isn't needed here because this only happens when we already checked it earlier
                 if while_loop[0].sum() == 1:
-                    vars_vals, dialouge, player_facing, level = parse_code(while_loop[1], vars_vals, dialouge, player_facing, level)
+                    vars_vals, dialogue, player_facing, level = parse_code(while_loop[1], vars_vals, dialogue, player_facing, level)
         elif char == 'w':
             player_coordinates[0] += 1
             vars_vals = {"e": [1] if len(
@@ -135,4 +137,4 @@ def parse_code(code, vars_vals, dialouge, player_facing, level):
         elif re.search("(\\(.|\\[.)*.\\?'.*'(\\)|\\])*", line) is not None:
             statement = re.sub('(\\(.)|(\\[.)|(\\])|(\\))', '', line).split('?')
             vars_vals[statement[0]] = statement[1]
-    return (vars_vals, dialouge, player_facing, level)
+    return (vars_vals, dialogue, player_facing, level)

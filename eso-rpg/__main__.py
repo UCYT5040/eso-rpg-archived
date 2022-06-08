@@ -1,4 +1,3 @@
-import re
 import levels, parse
 
 
@@ -42,11 +41,11 @@ def main():
     player_facing = 0  # 0N, 1E, 2S, 3W
     dialogue = False
     vars_vals = {
-        "e": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
-        "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 2 else [0],
+        "e": [1] if len(levels.blocks[int(get_facing(level, player_coordinates, player_facing))]['actions']) >= 1 else [0],
+        "q": [1] if len(levels.blocks[int(get_facing(level, player_coordinates, player_facing))]['actions']) >= 2 else [0],
         "d": [1], "i": [get_facing(level, player_coordinates, player_facing)]}
     for line in lines:
-        vars_vals, dialouge, player_facing, level = parse.parse(line, vars_vals, dialouge, player_facing, level)
+        vars_vals, dialogue, player_facing, level = parse.parse(line, vars_vals, dialogue, player_facing, level)
 
 
 
