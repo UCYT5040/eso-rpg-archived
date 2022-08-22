@@ -1,4 +1,24 @@
 import re
+def get_facing(level, coords, direction):
+    if direction == 0:
+        return level[coords[0] - 1][coords[1]]
+    elif direction == 1:
+        return level[coords[0]][coords[1] + 1]
+    elif direction == 2:
+        return level[coords[0] + 1][coords[1]]
+    elif direction == 3:
+        return level[coords[0]][coords[1] - 1]
+
+
+def move_forward(amount, coords, direction):
+    if direction == 0:
+        return [coords[0] - amount, coords[1]]
+    elif direction == 1:
+        return [coords[0], coords[1] + amount]
+    elif direction == 2:
+        return [coords[0] + amount, coords[1]]
+    elif direction == 3:
+        return [coords[0], coords[1] - amount]
 
 def parse(line, vars_vals, dialogue, player_facing, level):
     if_stack = 0  # +1 for every (, -1 for every ). Should be 0 by the end of the line.
@@ -30,7 +50,8 @@ def parse(line, vars_vals, dialogue, player_facing, level):
             if char == "'":
                 string_mode = False
                 if action_on_string_finish == "print":
-                    print(''.join([chr(x) for x in string_builder]), end='')
+                    list_of_chars = [chr(x) for x in string_builder]
+                    print(''.join(list_of_chars), end='')
             elif char == '\\':
                 skip_stack += 1
                 string_builder.append(ord(line[iteration + 1]))
