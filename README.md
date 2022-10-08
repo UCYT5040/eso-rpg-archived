@@ -6,6 +6,7 @@ A fun esolang experience.
 
 - eso rpg can run but may not be fully finished
 - eso rpg is in need of contributions to help text and improve the program
+  - TODO project: https://github.com/users/UCYT5040/projects/4
 
 ## Brief Overview
 
