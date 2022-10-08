@@ -2,6 +2,11 @@
 
 A fun esolang experience.
 
+## Curent State
+
+- eso rpg can run but may not be fully finished
+- eso rpg is in need of contributions to help text and improve the program
+
 ## Brief Overview
 
 eso rpg is an esolang that you can build an RPG with.
