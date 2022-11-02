@@ -1,4 +1,5 @@
 import re
+import levels
 def get_facing(level, coords, direction):
     if direction == 0:
         return level[coords[0] - 1][coords[1]]
@@ -9,6 +10,12 @@ def get_facing(level, coords, direction):
     elif direction == 3:
         return level[coords[0]][coords[1] - 1]
 
+def update_vals(level, player_coordinates, player_facing):
+    return {"e": [1] if len(
+                levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
+                            "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
+                                                'actions']) >= 2 else [0],
+                            "i": [get_facing(level, player_coordinates, player_facing)]}
 
 def move_forward(amount, coords, direction):
     if direction == 0:
@@ -47,17 +54,17 @@ def parse(line, vars_vals, dialogue, player_facing, level):
             if char == '}':
                 skip_until_end_while = False
         elif string_mode:
-            if char == "'":
+            if char == '/':
+                skip_stack += 1
+                string_builder.extend(iter(vars_vals[line[iteration + 1]]))
+            elif char == '\\':
+                skip_stack += 1
+                string_builder.append(ord(line[iteration + 1]))
+            elif char == "'":
                 string_mode = False
                 if action_on_string_finish == "print":
                     list_of_chars = [chr(x) for x in string_builder]
                     print(''.join(list_of_chars), end='')
-            elif char == '\\':
-                skip_stack += 1
-                string_builder.append(ord(line[iteration + 1]))
-            elif char == '/':
-                skip_stack += 1
-                string_builder.extend(iter(vars_vals[line[iteration + 1]]))
             else:
                 string_builder.append(ord(char))
         elif char == '(':
@@ -107,46 +114,22 @@ def parse(line, vars_vals, dialogue, player_facing, level):
                     vars_vals, dialogue, player_facing, level = parse_code(while_loop[1], vars_vals, dialogue, player_facing, level)
         elif char == 'w':
             player_coordinates[0] += 1
-            vars_vals = {"e": [1] if len(
-                levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
-                            "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
-                                                'actions']) >= 2 else [0],
-                            "i": [get_facing(level, player_coordinates, player_facing)]}
+            vars_vals.update(update_vals(level, player_coordinates, player_facing))
         elif char == 'a':
             player_coordinates[1] -= 1
-            vars_vals = {"e": [1] if len(
-                levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
-                            "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
-                                                'actions']) >= 2 else [0],
-                            "i": [get_facing(level, player_coordinates, player_facing)]}
+            vars_vals.update(update_vals(level, player_coordinates, player_facing))
         elif char == 's':
             player_coordinates[0] -= 1
-            vars_vals = {"e": [1] if len(
-                levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
-                            "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
-                                                'actions']) >= 2 else [0],
-                            "i": [get_facing(level, player_coordinates, player_facing)]}
+            vars_vals.update(update_vals(level, player_coordinates, player_facing))
         elif char == 'd':
             player_coordinates[1] += 1
-            vars_vals = {"e": [1] if len(
-                levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
-                            "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
-                                                'actions']) >= 2 else [0],
-                            "i": [get_facing(level, player_coordinates, player_facing)]}
+            vars_vals.update(update_vals(level, player_coordinates, player_facing))
         elif char == 'e':
             player_coordinates = move_forward(1, player_coordinates, player_facing)
-            vars_vals = {"e": [1] if len(
-                levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
-                            "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
-                                                'actions']) >= 2 else [0],
-                            "i": [get_facing(level, player_coordinates, player_facing)]}
+            vars_vals.update(update_vals(level, player_coordinates, player_facing))
         elif char == 'q':
             player_coordinates = move_forward(-1, player_coordinates, player_facing)
-            vars_vals = {"e": [1] if len(
-                levels.blocks[get_facing(level, player_coordinates, player_facing)]['actions']) >= 1 else [0],
-                            "q": [1] if len(levels.blocks[get_facing(level, player_coordinates, player_facing)][
-                                                'actions']) >= 2 else [0],
-                            "i": [get_facing(level, player_coordinates, player_facing)]}
+            vars_vals.update(update_vals(level, player_coordinates, player_facing))
         elif char == 'W':
             player_facing = 0
         elif char == 'D':
