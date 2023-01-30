@@ -4,9 +4,7 @@ A fun esolang experience.
 
 ## Curent State
 
-- eso rpg can run but may not be fully finished
-- eso rpg is in need of contributions to help text and improve the program
-  - TODO project: https://github.com/users/UCYT5040/projects/4
+> ⚠ This is the legacy version of eso rpg. A new version is in the works.
 
 ## Brief Overview
 
